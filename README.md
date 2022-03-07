@@ -15,31 +15,31 @@ Operacionalidade:
 
 Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
 
-`{
-    "assunto": "Compra de uma mesa",
-    "isOpen": false,
-    "associadosVotantes":[
-    {
-    "id": 3,
-    "name": "Bruce Wayne",
-    "cpf": "20540506010"
-    },
-    {
-    "id": 2,
-    "name": "Frank Junior",
-    "cpf": "69088835071"
-    }
-    ]
-}`
+        `{
+            "assunto": "Compra de uma mesa",
+            "isOpen": false,
+            "associadosVotantes":[
+            {
+                "id": 3,
+                "name": "Bruce Wayne",
+                "cpf": "20540506010"
+            },
+            {
+                "id": 2,
+                "name": "Frank Junior",
+                "cpf": "69088835071"
+            }
+            ]
+        }`
 
 - Rota para adicionar associado a uma pauta - exemplo:
   Usar a rota POST -> localhost:8080/pautas/addAssociado/{idPauta}
 
-  `{
-      "id": 4,
-      "name": "Tony Starky",
-      "cpf": "33974478019"
-  }`
+      `{
+          "id": 4,
+          "name": "Tony Starky",
+          "cpf": "33974478019"
+      }`
 ---------------------------------------------------------------------------------------------
 
 2) Abrir sessão de votação em uma pauta (passar um objeto PautaDTO no body):
@@ -47,27 +47,27 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
     
     Observação => É possível abrir a sessão passando ou não o parâmetro de tempo em segundos da sessão/pauta, conforme as chamadas acima exemplificadas.
 
-  `{
-      "id": 4,
-      "assunto": "Compra de uma mesa",
-      "associadosVotantes": [
-      {
-          "id": 3,
-          "name": "Bruce Wayne",
-          "cpf": "20540506010"
-      },
-      {
-          "id": 2,
-          "name": "Frank Junior",
-          "cpf": "69088835071"
-      },
-      {
+      `{
           "id": 4,
-          "name": "Tony Starky",
-          "cpf": "33974478019"
-      }
-      ]
-  }`
+          "assunto": "Compra de uma mesa",
+          "associadosVotantes": [
+          {
+              "id": 3,
+              "name": "Bruce Wayne",
+              "cpf": "20540506010"
+          },
+          {
+              "id": 2,
+              "name": "Frank Junior",
+              "cpf": "69088835071"
+          },
+          {
+              "id": 4,
+              "name": "Tony Starky",
+              "cpf": "33974478019"
+          }
+          ]
+      }`
 
 ------------------------------------------------------------------------------------------------------------------------
 3) Receber os votos dos associados, enquanto a pauta/sessão estiver com o campo de status 'isOpen' registrado como true:
