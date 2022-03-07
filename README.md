@@ -73,6 +73,7 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
 3) Receber os votos dos associados, enquanto a pauta/sessão estiver com o campo de status 'isOpen' registrado como true:
 
   Utilizar a rota POST: localhost:8080/manage-voting/realizaVoto
+  
     - Exemplo de payload:
       `{
           "cpf": "33974478019",
