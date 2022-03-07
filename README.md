@@ -50,8 +50,8 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
       `{
           "id": 4,
           "assunto": "Compra de uma mesa",
-          "associadosVotantes": [
-          {
+          "associadosVotantes": 
+          [{
               "id": 3,
               "name": "Bruce Wayne",
               "cpf": "20540506010"
@@ -65,8 +65,7 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
               "id": 4,
               "name": "Tony Starky",
               "cpf": "33974478019"
-          }
-          ]
+          }]
       }`
 
 ------------------------------------------------------------------------------------------------------------------------
