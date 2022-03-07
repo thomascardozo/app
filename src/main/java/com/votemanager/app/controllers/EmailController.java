@@ -19,7 +19,7 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
-    @PostMapping("/sending-email")
+    @PostMapping("/sending-email/v1")
     public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto){
 
         EmailModel emailModel = new EmailModel();

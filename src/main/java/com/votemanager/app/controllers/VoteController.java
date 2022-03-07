@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("votes")
+@RequestMapping("votes/v1")
 public class VoteController {
 
     final AssociadoService associadoService;

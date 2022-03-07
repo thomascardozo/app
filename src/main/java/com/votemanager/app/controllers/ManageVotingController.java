@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("manage-voting")
+@RequestMapping("manage-voting/v1")
 @Slf4j
 public class ManageVotingController {
 

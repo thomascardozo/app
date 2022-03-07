@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("associados")
+@RequestMapping("associados/v1")
 public class AssociadoController {
 
     final AssociadoService associadoService;

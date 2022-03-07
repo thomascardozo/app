@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("pautas")
+@RequestMapping("pautas/v1")
 @Slf4j
 public class PautaController {
 
