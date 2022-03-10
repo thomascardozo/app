@@ -1,6 +1,7 @@
 package com.votemanager.app.services;
 
 
+import com.votemanager.app.exceptions.AssociadoNotFoundException;
 import com.votemanager.app.models.AssociadoModel;
 import com.votemanager.app.repositories.AssociadoRepository;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,9 @@ public class AssociadoService {
         return associatedRepository.existsByCpfAndName(cpf, name);
     }
 
-    public boolean existsByCpf(String cpf) {
-        return associatedRepository.existsByCpf(cpf);
+    public boolean existsByCpf(String cpf) throws AssociadoNotFoundException {
+        Boolean associateExistsByCpf = associatedRepository.existsByCpf(cpf);
+        return associateExistsByCpf;
     }
 
     public Page<AssociadoModel> findAll(Pageable pageable) {

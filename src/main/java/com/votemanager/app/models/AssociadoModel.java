@@ -19,4 +19,5 @@ public class AssociadoModel implements Serializable {
     private String name;
 
     private String cpf;
+
 }

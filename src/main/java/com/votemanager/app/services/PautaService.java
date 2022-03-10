@@ -41,7 +41,7 @@ public class PautaService {
         return pautaRepository.save(pautaModel);
     }
 
-    public Optional<PautaModel> addAssociado(AssociadoDTO associadoDTO, Long idPauta){
+    public Optional<PautaModel> addAssociado(AssociadoDTO associadoDTO, Long idPauta) throws AssociadoNotFoundException{
 
         Optional<PautaModel> pautaOptional = pautaRepository.findById(idPauta);
         Boolean associadoExistsInDataBase = associadoRepository.existsByCpfAndId(associadoDTO.getCpf(), associadoDTO.getId());
