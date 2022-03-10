@@ -74,13 +74,15 @@ public class ManageVotingService {
 
     public String realizaVoto(VoteModel voteModel) throws VoteNotFoundException{
 
-        PautaModel pModel = pautaService.findById(voteModel.getPautaId()).get();
+        Optional<PautaModel> pModel = pautaService.findById(voteModel.getPautaId());
 
-        if(LocalDateTime.now().isAfter(pModel.getDataSessaoPautaFim()) ){
-            pModel.setIsOpen(pautaService.alteraStatusSessaoParaClosed(voteModel.getPautaId()));
+        PautaModel pautaModel = pModel.get();
+
+        if(LocalDateTime.now().isAfter(pautaModel.getDataSessaoPautaFim()) ){
+            pautaModel.setIsOpen(pautaService.alteraStatusSessaoParaClosed(voteModel.getPautaId()));
         }
 
-        Boolean statusPautaSessao = pModel.getIsOpen();
+        Boolean statusPautaSessao = pautaModel.getIsOpen();
 
         log.info("Imprimindo cpf {} / pautaId {} / statusPautaSessao {}", voteModel.getCpf(), voteModel.getPautaId(), statusPautaSessao);
 
@@ -89,7 +91,9 @@ public class ManageVotingService {
             voteRepository.save(voteModel);
             return VOTO_REGISTRADO_SUCESSO;
         } else if(statusPautaSessao == false) {
-            votingResult(pModel.getId());
+            if(pautaModel.getId() != null){
+                votingResult(pautaModel.getId());
+            }
             return SESSAO_FECHADA;
         } else if(!validaCpf(voteModel.getCpf()).equalsIgnoreCase(ABLE_TO_VOTE)){
             return UNABLE_TO_VOTE;
@@ -141,11 +145,9 @@ public class ManageVotingService {
             else
                 naos++;
 
-            //log.info("VALOR DA ESCOLHA >>>>>>>>>>>>>> CPF: " + vModel.getCpf() + " / ESCOLHA: " + vModel.getEscolha());
-
         }
 
-        String resultadoPautaSessao = "RESULTADO DA VOTAÇÃO >>>>>>>>>>>>:\nSIM:" + sims + " / NÃO: " + naos;
+        String resultadoPautaSessao = "RESULTADO DA VOTAÇÃO >>>>>>>>>>>>:\nSIM: " + sims + " / NÃO: " + naos;
 
         log.info(resultadoPautaSessao);
 
@@ -169,6 +171,5 @@ public class ManageVotingService {
 
         return emailModel;
     }
-
 
 }

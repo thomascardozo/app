@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
-//@SpringBootTest(classes = PautaService.class)
 @ExtendWith(SpringExtension.class)
 class PautaServiceTest {
 
@@ -46,9 +46,39 @@ class PautaServiceTest {
     PautaModel pautaModel = AppTestsUtil.buildPautaModel();
 
     @Test
-    void savePauta() {
+    void savePautaTest() {
         Mockito.when(pautaService.save(pautaModel)).thenReturn(AppTestsUtil.buildPautaModel());
     }
+
+    @Test
+    void searchByAssuntoPautaInexistsTest() {
+
+        String assuntoPauta = "XYZ";
+        Mockito.when(pautaService.existsByAssunto(assuntoPauta)).thenReturn(false);
+    }
+
+    @Test
+    void searchByAssuntoPautaExistsTest() {
+
+        String assuntoPauta = "XYZ";
+        Mockito.when(pautaService.existsByAssunto(assuntoPauta)).thenReturn(true);
+    }
+
+    @Test
+    void findAllPautasTest() {
+
+        Pageable pageable = Pageable.ofSize(10);
+        Mockito.when(pautaService.findAll(pageable)).thenReturn(AppTestsUtil.buildPageablePautas());
+    }
+
+    @Test
+    void returnFindByIdPautaTest(){
+
+        Long idPauta = 4L;
+
+        Mockito.when(pautaService.findById(idPauta)).thenReturn(Optional.ofNullable(AppTestsUtil.buildPauta()));
+    }
+
 
     @Test
     void errorInAddAssociateThatExistsInDataBaseAndInexistsInPautaTest(){
