@@ -7,7 +7,7 @@ Tecnologias utilizadas:
 - RabbitMQ;
 
 * Detalhes gerais de configuração do projeto, por favor observar os comentários no arquivo application.properties;
-* Para rodar deve-se clonar e importar na IDE de preferência (foi utilizado o IDE InteliJ Idea para o desenvolvimento). A seguir basta dar o start através da classe main, e as tabelas serão geradas automativcamente, desde que o banco de dados ms-associates tenha sido criado no postgres e a configuração de conexão adequadamente realizada.
+* Para rodar deve-se clonar e importar na IDE de preferência (foi utilizado o IDE InteliJ Idea para o desenvolvimento). A seguir basta dar o start através da classe main, e as tabelas serão geradas automaticamente, desde que o banco de dados 'ms-associates' tenha sido criado no postgres e a configuração de conexão adequadamente realizada.
 
 Operacionalidade:
 
