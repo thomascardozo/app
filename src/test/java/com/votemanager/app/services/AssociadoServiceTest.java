@@ -25,12 +25,12 @@ public class AssociadoServiceTest {
 
 
     @Test
-    void saveAssociadoTest() {
+    void saveAssociadoSuccessfulTest() {
         Mockito.when(associadoService.save(associado)).thenReturn(AppTestsUtil.buildAssociado());
     }
 
     @Test
-    void searchByCpfAndNameInexistsTest() {
+    void searchByCpfAndNameInexists_returnsFalseTest() {
 
         String cpfInexistente = "78945612374";
         String nomeInexistente = "NomeFake";
@@ -39,7 +39,7 @@ public class AssociadoServiceTest {
     }
 
     @Test
-    void searchByCpfAndNameExistsTest() {
+    void searchByCpfAndNameExists_returnsTrueTest() {
 
         String cpfExistente = "12345678936";
         String nomeExistente = "NameTest";
@@ -48,21 +48,21 @@ public class AssociadoServiceTest {
     }
 
     @Test
-    void searchByCpfInexistsTest() {
+    void searchByCpfInexistsTest_returnsFalseTest() {
 
         String cpfInexistente = "12345678935";
         Mockito.when(associadoService.existsByCpf(cpfInexistente)).thenReturn(false);
     }
 
     @Test
-    void searchByCpfExistsTest() {
+    void searchByCpfExistsTest_returnsTrueTest() {
 
         String cpfExistente = "12345678936";
         Mockito.when(associadoService.existsByCpf(cpfExistente)).thenReturn(true);
     }
 
     @Test
-    void findAllAssociadosTest() {
+    void findAllAssociados_successfullTest() {
         Pageable pageable = Pageable.ofSize(10);
 
         Mockito.when(associadoService.findAll(pageable)).thenReturn(AppTestsUtil.buildPageableAssociados());
@@ -70,7 +70,7 @@ public class AssociadoServiceTest {
     }
 
     @Test
-    void returnFindByIdTest(){
+    void returnFindById_successfullTest(){
 
         Long idAssociado = 2L;
         Mockito.when(associadoService.findById(idAssociado)).thenReturn(Optional.ofNullable(AppTestsUtil.buildAssociado()));

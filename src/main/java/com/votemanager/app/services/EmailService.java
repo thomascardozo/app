@@ -21,9 +21,10 @@ public class EmailService {
     JavaMailSender javaMailSender;
 
     public EmailModel sendEmail(EmailModel emailModel) {
-        emailModel.setSendDateEmail(LocalDateTime.now());
 
         try {
+
+            emailModel.setSendDateEmail(LocalDateTime.now());
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(emailModel.getEmailFrom());
             message.setTo(emailModel.getEmailTo());

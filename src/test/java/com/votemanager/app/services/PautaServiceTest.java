@@ -29,12 +29,13 @@ class PautaServiceTest {
     private PautaRepository pautaRepository;
 
     @Mock
-    AssociadoRepository associadoRepository;
+    private AssociadoRepository associadoRepository;
 
     @BeforeEach
     void setUp(){
 
         Optional<PautaModel> pautaModelOptional = Optional.of(AppTestsUtil.buildPautaModel());
+
         BDDMockito.when(pautaRepository.findById(ArgumentMatchers.any()))
                 .thenReturn(pautaModelOptional);
 
@@ -46,58 +47,50 @@ class PautaServiceTest {
     PautaModel pautaModel = AppTestsUtil.buildPautaModel();
 
     @Test
-    void savePautaTest() {
+    void savePauta_successfullTest() {
         Mockito.when(pautaService.save(pautaModel)).thenReturn(AppTestsUtil.buildPautaModel());
     }
 
     @Test
-    void searchByAssuntoPautaInexistsTest() {
+    void searchByAssuntoPautaInexists_returnFalseTest() {
 
         String assuntoPauta = "XYZ";
         Mockito.when(pautaService.existsByAssunto(assuntoPauta)).thenReturn(false);
     }
 
     @Test
-    void searchByAssuntoPautaExistsTest() {
+    void searchByAssuntoPautaExists_returnTrueTest() {
 
         String assuntoPauta = "XYZ";
         Mockito.when(pautaService.existsByAssunto(assuntoPauta)).thenReturn(true);
     }
 
     @Test
-    void findAllPautasTest() {
+    void returnsFindAllPautas_successfullTest() {
 
         Pageable pageable = Pageable.ofSize(10);
         Mockito.when(pautaService.findAll(pageable)).thenReturn(AppTestsUtil.buildPageablePautas());
     }
 
     @Test
-    void returnFindByIdPautaTest(){
+    void returnsFindByIdPauta_successfullTest(){
 
         Long idPauta = 4L;
-
         Mockito.when(pautaService.findById(idPauta)).thenReturn(Optional.ofNullable(AppTestsUtil.buildPauta()));
     }
 
-
     @Test
-    void errorInAddAssociateThatExistsInDataBaseAndInexistsInPautaTest(){
+    void throwExceptionInAddAssociateThatExistsInDataBase_AndInexistsInPautaTest(){
 
         AssociadoDTO assDTO = AppTestsUtil.buildAssociadoDTO();
         AssociadoModel assModel = new AssociadoModel();
-        List<AssociadoModel> associadoModelList = AppTestsUtil.buildListaAssociadosVotantes();
-        BeanUtils.copyProperties(assDTO, assModel);
-        associadoModelList.add(assModel);
-
-        PautaModel pautaOptional = new PautaModel();
-        pautaOptional.setAssociadosVotantes(associadoModelList);
 
         Mockito.when(pautaService.addAssociado(assDTO, 4L)).thenThrow(new AssociadoNotFoundException("Erro ao inserir"));
 
     }
 
     @Test
-    void addAssociateThatExistsInDataBaseAndInexistsInPautaTest(){
+    void addAssociateThatExistsInDataBase_AndInexistsInPautaTest(){
 
         AssociadoDTO assDTO = AppTestsUtil.buildAssociadoDTO();
         AssociadoModel assModel = new AssociadoModel();
@@ -111,8 +104,6 @@ class PautaServiceTest {
         Assertions.assertThat(pautaService.addAssociado(assDTO, 4L))
                 .isNotNull()
                 .isNotEmpty();
-
-        //BDDMockito.when(pautaService.addAssociado(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).thenReturn(Optional.of(pautaModel));
 
     }
 

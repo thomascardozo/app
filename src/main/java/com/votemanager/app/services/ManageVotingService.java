@@ -1,7 +1,6 @@
 package com.votemanager.app.services;
 
 import com.votemanager.app.dtos.PautaDTO;
-import com.votemanager.app.exceptions.VoteNotFoundException;
 import com.votemanager.app.models.*;
 import com.votemanager.app.repositories.AssociadoRepository;
 import com.votemanager.app.repositories.VoteRepository;
@@ -72,7 +71,7 @@ public class ManageVotingService {
     }
 
 
-    public String realizaVoto(VoteModel voteModel) throws VoteNotFoundException{
+    public String realizaVoto(VoteModel voteModel){
 
         Optional<PautaModel> pModel = pautaService.findById(voteModel.getPautaId());
 
@@ -109,7 +108,7 @@ public class ManageVotingService {
 
     }
 
-    private Boolean validaAssociadosExistemSessao  (List<AssociadoModel> associadoServiceList){
+    public Boolean validaAssociadosExistemSessao  (List<AssociadoModel> associadoServiceList){
 
         Boolean isListaAssociadosExistente = false;
         if(associadoServiceList != null){
@@ -119,7 +118,7 @@ public class ManageVotingService {
         return isListaAssociadosExistente;
     }
 
-    private Boolean realizouVotoNaPautaCorrente(String cpf, Long idPauta){
+    public Boolean realizouVotoNaPautaCorrente(String cpf, Long idPauta){
 
         Optional<VoteModel> alreadyVotes = voteRepository.findByCpfAndPautaModelId(cpf,idPauta);
 
@@ -129,9 +128,10 @@ public class ManageVotingService {
             return true;
     }
 
-    public String votingResult(Long id){
+    public String votingResult(Long idPauta){
 
-        PautaModel pautaModel = pautaService.findById(id).get();
+        Optional<PautaModel> pautaModelOptional = pautaService.findById(idPauta);
+        PautaModel pautaModel = pautaModelOptional.get();
         Long pautaId = pautaModel.getId();
         String assuntoVotacao = pautaModel.getAssunto();
         List<VoteModel> listVotesPauta = voteRepository.findByPautaModelId(pautaId);
