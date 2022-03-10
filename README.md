@@ -13,7 +13,7 @@ Operacionalidade:
 
 1) Cadastro de uma nova pauta - exemplo de requisição (passar um objeto PautaDTO no body):
 
-Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
+Usar a rota POST -> localhost:8080/pautas/v1 -> payload exemplo:
 
         `{
             "assunto": "Compra de uma mesa",
@@ -33,7 +33,7 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
         }`
 
 - Rota para adicionar associado a uma pauta - exemplo:
-  Usar a rota POST -> localhost:8080/pautas/addAssociado/{idPauta}
+  Usar a rota POST -> localhost:8080/pautas/v1/addAssociado/{idPauta}
 
       `{
           "id": 4,
@@ -43,7 +43,7 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
 ---------------------------------------------------------------------------------------------
 
 2) Abrir sessão de votação em uma pauta (passar um objeto PautaDTO no body):
-  Utilizar as rotas POST: localhost:8080/manage-voting/processaSessao/{tempo de duração em segundos} ou localhost:8080/manage-voting/processaSessao 
+  Utilizar as rotas POST: localhost:8080/manage-voting/v1/processaSessao/{tempo de duração em segundos} ou localhost:8080/manage-voting/v1/processaSessao 
     
     Observação => É possível abrir a sessão passando ou não o parâmetro de tempo em segundos da sessão/pauta, conforme as chamadas acima exemplificadas.
 
@@ -71,7 +71,7 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
 ------------------------------------------------------------------------------------------------------------------------
 3) Receber os votos dos associados, enquanto a pauta/sessão estiver com o campo de status 'isOpen' registrado como true:
 
-  Utilizar a rota POST: localhost:8080/manage-voting/realizaVoto
+  Utilizar a rota POST: localhost:8080/manage-voting/v1/realizaVoto
   
     - Exemplo de payload:
       `{
@@ -81,11 +81,11 @@ Usar a rota POST -> localhost:8080/pautas/ -> payload exemplo:
       }`
 ------------------------------------------------------------------------------------------------------------------------
 4) Contabilizar os votos e dar o resultado da votação na pauta (usando mensageria com RabbitMQ via email):
-  Rota GET: localhost:8080/manage-voting/resultadoPautaSessao/4
+  Rota GET: localhost:8080/manage-voting/v1/resultadoPautaSessao/4
 ------------------------------------------------------------------------------------------------------------------------
 Bônus:
 
-1) Integração com sistema de consulta de cpfs -> Classe services.ValidaCpfService;
+1) Integração com sistema de consulta de CPFs -> Classe services.ValidaCpfService;
 2) Mensageria / Filas -> Envio de emails de notificação de resultado da votação com auxilio da ferramenta RabbitMQ;
-3) Não realizada;
-4) Versionamento utilizando o padrão simples 'v1' na url base, tendo em vista facilitar o desenvolvimento e dispor de simplicidade neste aspecto.
+3) Não realizado;
+4) Versionamento: utilização do padrão simples '/v1' nas urls base, tendo em vista facilitar o desenvolvimento e dispor de simplicidade neste aspecto.
