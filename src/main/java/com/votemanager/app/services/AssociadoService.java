@@ -25,7 +25,7 @@ public class AssociadoService {
         return associatedRepository.save(associatedModel);
     }
 
-    public boolean existsByCpfAndName(String cpf, String name) {
+    public boolean existsByCpfAndName(String cpf, String name) throws AssociadoNotFoundException{
         return associatedRepository.existsByCpfAndName(cpf, name);
     }
 
@@ -38,7 +38,7 @@ public class AssociadoService {
         return associatedRepository.findAll(pageable);
     }
 
-    public Optional<AssociadoModel> findById(Long id) {
+    public Optional<AssociadoModel> findById(Long id) throws AssociadoNotFoundException{
         return associatedRepository.findById(id);
     }
 
